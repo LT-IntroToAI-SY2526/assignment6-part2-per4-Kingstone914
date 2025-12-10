@@ -67,7 +67,7 @@ def visualize_features(data):
     #       - labels and title
     #       - grid
     axes[0, 1].scatter(data['Bedrooms'], data['Price'], color='green', alpha=0.6)
-    axes[0, 1].set_xlabel('Bedrooms (years)')
+    axes[0, 1].set_xlabel('Bedrooms (# of bedrooms)')
     axes[0, 1].set_ylabel('Price ($)')
     axes[0, 1].set_title('Bedrooms vs Price')
     axes[0, 1].grid(True, alpha=0.3)
@@ -76,7 +76,7 @@ def visualize_features(data):
     #       - labels and title
     #       - grid
     axes[1, 0].scatter(data['Bathrooms'], data['Price'], color='red', alpha=0.6)
-    axes[1, 0].set_xlabel('Bathrooms (0=Toyota, 1=Honda, 2=Ford)')
+    axes[1, 0].set_xlabel('Bathrooms (# of bathrooms)')
     axes[1, 0].set_ylabel('Price ($)')
     axes[1, 0].set_title('Bathrooms vs Price')
     axes[1, 0].grid(True, alpha=0.3)
@@ -85,9 +85,16 @@ def visualize_features(data):
     #       - scatter plot, color='orange', alpha=0.6
     #       - labels and title
     #       - grid
-    axes[1, 1].text(0.5, 0.5, 'Space for additional features', 
-                    ha='center', va='center', fontsize=12)
-    axes[1, 1].axis('off')
+    axes[1, 1].scatter(data['Age'], data['Price'], color='orange', alpha=0.6)
+    axes[1, 1].set_xlabel('Age (years)')
+    axes[1, 1].set_ylabel('Price ($)')
+    axes[1, 1].set_title('Age vs Price')
+    axes[1, 1].grid(True, alpha=0.3)
+
+
+
+
+
     
     
     # TODO: Use plt.tight_layout() to make plots fit nicely
@@ -275,7 +282,7 @@ def make_prediction(model, sqft, bedrooms, bathrooms, age):
                                  columns=['SquareFeet', 'Bedrooms', 'Bathrooms','Age'])
     predicted_price = model.predict(car_features)[0]
     # TODO: Make a prediction using model.predict()
-    brand_name = ['Toyota', 'Honda', 'Ford'][bedrooms]
+    bedrooms = ['3'][bedrooms]
     # TODO: Print the house specs and predicted price nicely formatted
     print(f"\n=== New Prediction ===")
     print(f"House Features: {'Squarefeet':.0f}k sqft, {age} years old, {bedrooms}")
